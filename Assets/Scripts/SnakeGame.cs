@@ -49,6 +49,10 @@ public class SnakeGame : MonoBehaviour
     private float stepTimer;
     private bool isDead;
 
+    public int CurrentScore => score;
+    public bool IsDead => isDead;
+    public event System.Action<int> GameOver;
+
     void Start()
     {
         positions.Add(Vector2Int.zero);
@@ -261,8 +265,8 @@ public class SnakeGame : MonoBehaviour
         do
         {
             pos = new Vector2Int(
-                Random.Range(-gridHalfSize, gridHalfSize + 1),
-                Random.Range(-gridHalfSize, gridHalfSize + 1));
+                UnityEngine.Random.Range(-gridHalfSize, gridHalfSize + 1),
+                UnityEngine.Random.Range(-gridHalfSize, gridHalfSize + 1));
             tries++;
         } while (positions.Contains(pos) && tries < 200);
 
@@ -278,8 +282,11 @@ public class SnakeGame : MonoBehaviour
 
     void Die()
     {
+        if (isDead) return;
+
         isDead = true;
-        if (scoreText != null) scoreText.text = $"SCORE: {score}\nGAME OVER";
+        GameOver?.Invoke(score);
+        if (scoreText != null) scoreText.text = $"SCORE: {score}";
     }
 
     void UpdateScoreUI()

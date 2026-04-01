@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a1b2c4d5e6789012345678abcdef12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeGame: {fileID: 501}
+  snakeGame: {fileID: 503}
   offset: {x: 0, y: 14, z: -14}
   lookAhead: {x: 0, y: 0, z: 0}
   deadzone: 3
@@ -537,7 +537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502}
-  - component: {fileID: 501}
+  - component: {fileID: 503}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -545,26 +545,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315c85db8cb8c42049745b79cb0ab3da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  snakeHeadPrefab: {fileID: 100000, guid: a5434eb77b6346fd899890fb2c69f239, type: 3}
-  snakeBodyPrefab: {fileID: 100000, guid: 9ccb6bdf882f4e458ca0e79d69e19eab, type: 3}
-  foodPrefab: {fileID: 100000, guid: bc09ca579d604360bdad2d82ccd5eced, type: 3}
-  scoreText: {fileID: 703}
-  gridHalfSize: 10
-  moveInterval: 0.3
-  minMoveInterval: 0.1
-  speedIncrement: 0.005
 --- !u!4 &502
 Transform:
   m_ObjectHideFlags: 0
@@ -580,6 +560,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315c85db8cb8c42049745b79cb0ab3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snakeHeadPrefab: {fileID: 100000, guid: a5434eb77b6346fd899890fb2c69f239, type: 3}
+  snakeBodyPrefab: {fileID: 100000, guid: 9ccb6bdf882f4e458ca0e79d69e19eab, type: 3}
+  foodPrefab: {fileID: 100000, guid: bc09ca579d604360bdad2d82ccd5eced, type: 3}
+  scoreText: {fileID: 703}
+  gridHalfSize: 15
+  moveInterval: 0.3
+  minMoveInterval: 0.1
+  speedIncrement: 0.005
 --- !u!1 &600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,6 +1093,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &179170342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 179170344}
+  - component: {fileID: 179170343}
+  m_Layer: 0
+  m_Name: GameOverManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &179170343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179170342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8077fcd4479343dcac51389f50df2e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snakeGame: {fileID: 503}
+  gameOverPanel: {fileID: 0}
+  finalScoreText: {fileID: 0}
+  leaderboardText: {fileID: 0}
+  restartButton: {fileID: 0}
+  clearHistoryButton: {fileID: 0}
+  confirmClearPanel: {fileID: 0}
+  confirmMessageText: {fileID: 0}
+  confirmYesButton: {fileID: 0}
+  confirmNoButton: {fileID: 0}
+--- !u!4 &179170344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179170342}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1107,3 +1161,4 @@ SceneRoots:
   - {fileID: 1103}
   - {fileID: 1203}
   - {fileID: 1303}
+  - {fileID: 179170344}

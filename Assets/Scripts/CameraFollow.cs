@@ -48,7 +48,7 @@ public class CameraFollow : MonoBehaviour
         {
             _vel = Vector3.Lerp(_vel, Vector3.zero, Time.deltaTime * 10f);
         }
-
+        
         transform.position = _anchor + offset;
         transform.LookAt(_anchor + lookAhead);
     }
