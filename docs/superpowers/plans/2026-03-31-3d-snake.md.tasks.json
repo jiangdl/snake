@@ -1,0 +1,54 @@
+{
+  "planPath": "docs/superpowers/plans/2026-03-31-3d-snake.md",
+  "tasks": [
+    {
+      "id": 4,
+      "subject": "Task 1: Install URP and Configure Render Pipeline",
+      "status": "pending",
+      "description": "**Goal:** Install `com.unity.render-pipelines.universal` and set it as the active render pipeline.\n\n**Files:**\n- Create: `Assets/Settings/URP-Asset.asset`\n- Create: `Assets/Settings/URP-Renderer.asset`\n\n**Acceptance Criteria:**\n- [ ] Package installed and compiled\n- [ ] URP-Asset.asset created\n- [ ] No pipeline errors in console\n\n**Verify:** `manage_graphics action: pipeline_get_info` → shows URP as active\n\n```json:metadata\n{\"files\": [\"Assets/Settings/URP-Asset.asset\", \"Assets/Settings/URP-Renderer.asset\"], \"verifyCommand\": \"manage_graphics action: pipeline_get_info\", \"acceptanceCriteria\": [\"URP package installed\", \"URP-Asset.asset created\", \"no pipeline errors in console\"], \"requiresUserVerification\": false}\n```"
+    },
+    {
+      "id": 5,
+      "subject": "Task 2: Create GridEmission Shader and Floor Material",
+      "status": "pending",
+      "blockedBy": [4],
+      "description": "**Goal:** Write a custom URP HLSL unlit shader that renders a glowing grid, then create its material.\n\n**Files:**\n- Create: `Assets/Shaders/GridEmission.shader`\n- Create: `Assets/Materials/GridFloorMaterial.mat`\n\n**Acceptance Criteria:**\n- [ ] Shader compiles without errors\n- [ ] Material uses Custom/GridEmission shader\n- [ ] _GridSize=30, _LineWidth=0.05, _EmissionIntensity=1.5\n\n**Verify:** `read_console types: [\"error\"]` → no shader errors\n\n```json:metadata\n{\"files\": [\"Assets/Shaders/GridEmission.shader\", \"Assets/Materials/GridFloorMaterial.mat\"], \"verifyCommand\": \"read_console types: [\\\"error\\\"] count: 5\", \"acceptanceCriteria\": [\"shader compiles\", \"material uses Custom/GridEmission\", \"grid properties set correctly\"], \"requiresUserVerification\": false}\n```"
+    },
+    {
+      "id": 6,
+      "subject": "Task 3: Create Emission Materials for Snake and Food",
+      "status": "pending",
+      "blockedBy": [4],
+      "description": "**Goal:** Create 3 URP Lit materials with HDR emission for snake head, body, and food.\n\n**Files:**\n- Create: `Assets/Materials/SnakeHeadMaterial.mat`\n- Create: `Assets/Materials/SnakeBodyMaterial.mat`\n- Create: `Assets/Materials/FoodMaterial.mat`\n\n**Acceptance Criteria:**\n- [ ] SnakeHeadMaterial HDR emission (2.0, 1.2, 0.4)\n- [ ] SnakeBodyMaterial HDR emission (0.72, 0.36, 1.8)\n- [ ] FoodMaterial HDR emission (2.0, 1.7, 0.0)\n- [ ] _EMISSION enabled on all 3\n\n**Verify:** `manage_asset action: get_info path: Assets/Materials/SnakeHeadMaterial.mat`\n\n```json:metadata\n{\"files\": [\"Assets/Materials/SnakeHeadMaterial.mat\", \"Assets/Materials/SnakeBodyMaterial.mat\", \"Assets/Materials/FoodMaterial.mat\"], \"verifyCommand\": \"manage_asset action: get_info path: Assets/Materials/SnakeHeadMaterial.mat\", \"acceptanceCriteria\": [\"SnakeHeadMaterial HDR emission\", \"SnakeBodyMaterial HDR emission\", \"FoodMaterial HDR emission\", \"_EMISSION enabled\"], \"requiresUserVerification\": false}\n```"
+    },
+    {
+      "id": 7,
+      "subject": "Task 4: Implement Game Scripts",
+      "status": "pending",
+      "blockedBy": [5, 6],
+      "description": "**Goal:** Create FoodFloat.cs and SnakeGame.cs.\n\n**Files:**\n- Create: `Assets/Scripts/FoodFloat.cs`\n- Create: `Assets/Scripts/SnakeGame.cs`\n\n**Acceptance Criteria:**\n- [ ] Both compile without errors\n- [ ] FoodFloat oscillates Y\n- [ ] SnakeGame: WASD/Arrow, 0.3s interval, grows on food, dies on wall/self, +10/food\n\n**Verify:** `read_console types: [\"error\"] count: 10` → zero errors\n\n```json:metadata\n{\"files\": [\"Assets/Scripts/FoodFloat.cs\", \"Assets/Scripts/SnakeGame.cs\"], \"verifyCommand\": \"read_console types: [\\\"error\\\"] count: 10\", \"acceptanceCriteria\": [\"both scripts compile\", \"FoodFloat oscillates Y\", \"SnakeGame has full game loop\"], \"requiresUserVerification\": false}\n```"
+    },
+    {
+      "id": 8,
+      "subject": "Task 5: Create Prefabs",
+      "status": "pending",
+      "blockedBy": [6, 7],
+      "description": "**Goal:** Create SnakeHeadPrefab, SnakeBodyPrefab, and FoodPrefab.\n\n**Files:**\n- Create: `Assets/Prefabs/SnakeHeadPrefab.prefab`\n- Create: `Assets/Prefabs/SnakeBodyPrefab.prefab`\n- Create: `Assets/Prefabs/FoodPrefab.prefab`\n\n**Acceptance Criteria:**\n- [ ] SnakeHeadPrefab: Sphere scale 1.0, SnakeHeadMaterial\n- [ ] SnakeBodyPrefab: Sphere scale 0.8, SnakeBodyMaterial\n- [ ] FoodPrefab: Cube scale 0.7, FoodMaterial, FoodFloat\n\n**Verify:** `manage_prefabs action: get_info prefab_path: Assets/Prefabs/SnakeHeadPrefab.prefab`\n\n```json:metadata\n{\"files\": [\"Assets/Prefabs/SnakeHeadPrefab.prefab\", \"Assets/Prefabs/SnakeBodyPrefab.prefab\", \"Assets/Prefabs/FoodPrefab.prefab\"], \"verifyCommand\": \"manage_prefabs action: get_info prefab_path: Assets/Prefabs/SnakeHeadPrefab.prefab\", \"acceptanceCriteria\": [\"SnakeHeadPrefab Sphere 1.0\", \"SnakeBodyPrefab Sphere 0.8\", \"FoodPrefab Cube 0.7 with FoodFloat\"], \"requiresUserVerification\": false}\n```"
+    },
+    {
+      "id": 9,
+      "subject": "Task 6: Build SnakeScene",
+      "status": "pending",
+      "blockedBy": [8],
+      "description": "**Goal:** Create the main game scene with camera, light, grid floor, Bloom, GameManager, and score UI — fully wired.\n\n**Files:**\n- Create: `Assets/Scenes/SnakeScene.unity`\n\n**Acceptance Criteria:**\n- [ ] Camera at (0,18,-12), rotation (50,0,0)\n- [ ] Dark background (0.05,0.05,0.1)\n- [ ] Directional Light at (5,10,-5), intensity 1.5\n- [ ] GridFloor Plane scale (3,1,3) with GridFloorMaterial\n- [ ] Global Bloom: threshold 0.8, intensity 1.5, scatter 0.5\n- [ ] GameManager with SnakeGame + all prefab refs\n- [ ] Canvas ScoreText top-right -50,-50\n- [ ] scoreText ref wired\n\n**Verify:** `manage_camera action: screenshot include_image: true`\n\n```json:metadata\n{\"files\": [\"Assets/Scenes/SnakeScene.unity\"], \"verifyCommand\": \"manage_camera action: screenshot include_image: true\", \"acceptanceCriteria\": [\"camera configured\", \"grid floor with material\", \"Bloom volume\", \"GameManager with prefab refs\", \"score UI top-right\"], \"requiresUserVerification\": false}\n```"
+    },
+    {
+      "id": 10,
+      "subject": "Task 7: Final Visual Verification",
+      "status": "pending",
+      "blockedBy": [9],
+      "description": "**Goal:** Run in play mode, screenshot, confirm all 10 spec acceptance criteria with user.\n\n**Files:** None\n\n**Acceptance Criteria:**\n- [ ] All 10 spec visual criteria confirmed by user\n\n**Verify:** User confirms screenshot matches spec\n\n**User Verification Required:**\nBefore marking complete, call AskUserQuestion with screenshot and ask user to confirm visual match.\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"manage_camera action: screenshot include_image: true\", \"acceptanceCriteria\": [\"all 10 spec acceptance criteria visually confirmed by user\"], \"requiresUserVerification\": true, \"userVerificationPrompt\": \"Does the screenshot match the spec? (glowing grid, orange head, blue-purple body, gold food, diagonal camera, score UI)\"}\n```"
+    }
+  ],
+  "lastUpdated": "2026-03-31T00:00:00Z"
+}
